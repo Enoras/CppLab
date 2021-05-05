@@ -1,8 +1,9 @@
 #include "include/SDL.h"
-#include <stdio.h>
 #include <string.h>
 #include <random>
 #include <ctime>
+#include <memory>
+#include <iostream>
 
 //Screen dimension constants
 int SCREEN_WIDTH = 640;
@@ -12,6 +13,7 @@ const int NUM_REC = 8;
 const int SIZE_REC = 40;
 const int NUM_COLOR = 6;
 
+#define EMPTY NUM_COLOR
 
 //Starts up SDL and creates window
 bool init();
@@ -31,6 +33,98 @@ SDL_Surface* gScreenSurface = NULL;
 //The image we will load and show on the screen
 SDL_Surface* color[NUM_COLOR+1];
 int field[NUM_REC][NUM_REC];
+
+
+bool check_for_right_pos(int i, int j) {
+	if (i < NUM_REC && j < NUM_REC && i >= 0 && j >= 0) {
+
+		if (field[i][j] != EMPTY)
+			return true;
+
+	}
+	return false;
+}
+
+class bonus {
+
+public:
+
+	const int chance = 5;
+	
+	virtual void action(int i, int j) {};
+};
+
+class recolor: public bonus{
+public:
+	
+
+	SDL_Surface* icon;
+	recolor() {
+		icon = SDL_LoadBMP("star.bmp");
+		if (icon == NULL)
+		{
+			std::cout << "Loadind star Error";
+		
+		}
+	}
+
+	~recolor () {
+		SDL_FreeSurface(icon);
+	}
+
+	void action(int i, int j) {
+		int i1, i2, j1, j2;
+
+		do {
+			i1 = rand() % 5 - 2 + i;
+			j1 = rand() % 5 - 2 + j;
+		} while (!check_for_right_pos(i1, j1));
+
+		do {
+			i2 = rand() % 5 - 2 + i;
+			j2 = rand() % 5 - 2 + j;
+		} while (!check_for_right_pos(i2, j2));
+
+		
+		    field[i1][j1] = field[i][j];
+		
+		   field[i2][j2] = field[i][j];
+	}
+};
+
+
+class explosion : public bonus {
+public:
+	
+	SDL_Surface* icon;
+	explosion () {
+		icon = SDL_LoadBMP("bomb.bmp");
+		if (icon == NULL)
+		{
+			std::cout << "Loadind bomb Error";
+
+		}
+	}
+
+	~explosion() {
+		SDL_FreeSurface(icon);
+	}
+	void action(int i, int j) {
+
+		for (int k = 0; k < 4; k++) {
+			int i2 = rand() % NUM_REC;
+			int j2 = rand() % NUM_REC;
+
+			field[i2][j2] = EMPTY;
+		}
+
+		field[i][j] = EMPTY;
+
+	}
+};
+
+recolor recol;
+explosion explos;
 
 bool init()
 {
@@ -103,6 +197,7 @@ void filling_color() {
 
 void show_image() {
 
+
 	SDL_Rect r;
 	r.w = SIZE_REC-2;
 	r.h = SIZE_REC-2;
@@ -115,6 +210,7 @@ void show_image() {
 
 	for (int i = 0; i < NUM_REC; i++) {
 		for (int j = 0; j < NUM_REC; j++) {
+			 
 			SDL_BlitSurface(color[field[i][j]], &r, gScreenSurface, &p);
 			p.x += SIZE_REC;
 		}
@@ -141,6 +237,7 @@ void swap_rec(int *x, int *y) {
 	}
 
 }
+
 
 void search_re(int c ,int i,int j, int* k, int way[NUM_REC][NUM_REC]) {
 	if (i >= NUM_REC || j >= NUM_REC || i<0 || j<0)
@@ -173,14 +270,7 @@ void del(int i, int j, int way[NUM_REC][NUM_REC]) {
 	}
 }
 
-//void clear_way(int way[NUM_REC][NUM_REC]) {
-//	for (int i = 0; i < NUM_REC; i++) {
-//		for (int j = 0; j < NUM_REC; j++) {
-//			way[i][j] = 0;
-//
-//		}
-//	}
-//}
+
 
 int delete_re() {
 	int num_elem = 0;
@@ -239,9 +329,75 @@ void filling_empty_rec() {
 
 }
 
-void processing() {
 
+void adding_bonus(){
+
+	bonus *b;
+	SDL_Rect r;
+	r.w = SIZE_REC - 2;
+	r.h = SIZE_REC - 2;
+	r.x = 0;
+	r.y = 0;
+
+	SDL_Rect p;
+
+	for (int i = 0; i < NUM_REC; i++) {
+		for (int j = 0; j < NUM_REC; j++) {
+
+			if (field[i][j] == NUM_COLOR) {
+
+				int check_chance = rand() % 100;
+				if (check_chance < recol.chance) {
+
+					int i2, j2;
+					do {
+						i2 = rand() % 5 - 2 + i;
+						j2 = rand() % 5 - 2 + j;
+					} while(!check_for_right_pos(i2, j2));
+
+					
+
+					if (i2 < NUM_REC && j2 < NUM_REC && i2 >= 0 && j2 >= 0) {
+						int temp = (rand() % 2 + 1) * -1;
+
+						p.x = j2 * SIZE_REC;
+						p.y = i2 * SIZE_REC;
+
+						if (temp == -1) {
+		
+							SDL_BlitSurface(recol.icon, &r, gScreenSurface, &p);
+							b = &recol;
+						}
+						if (temp == -2) {
+
+							SDL_BlitSurface(explos.icon, &r, gScreenSurface, &p);
+							b = &explos;
+						}
+						SDL_UpdateWindowSurface(gWindow);
+						SDL_Delay(500);
+						b->action(i2, j2);
+						show_image();
+						SDL_Delay(500);
+
+
+					}
+				}
+
+				
+			}
+
+		}
+	}
+}
+
+
+void processing() {
+	SDL_Delay(100);
 	while (delete_re() != 0) {
+		show_image();
+		SDL_Delay(100);
+		adding_bonus();
+
 		filling_empty_rec();
 	}
 
@@ -271,14 +427,14 @@ int main( int argc, char* args[] )
 	//Start up SDL and create window
 	if( !init() )
 	{
-		printf( "Failed to initialize!\n" );
+		std::cout << "Failed to initialize!\n";
 	}
 	else
 	{
 		//Load media
 		if( !loadMedia() )
 		{
-			printf( "Failed to load media!\n" );
+			std::cout<<"Failed to load media!\n";
 		}
 		else
 		{		
@@ -314,7 +470,8 @@ int main( int argc, char* args[] )
 						k++;
 						if (k == 2) {
 							swap_rec(x, y);
-							SDL_Delay(200);
+							show_image();
+							
 							processing();
 							k = 0;
 						}

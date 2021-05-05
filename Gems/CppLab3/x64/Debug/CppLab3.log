@@ -1,4 +1,4 @@
-﻿  03_event_driven_programming.cpp
-C:\Users\raula\source\repos\CppLab3\CppLab3\03_event_driven_programming.cpp(75,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\raula\source\repos\CppLab3\CppLab3\03_event_driven_programming.cpp(92,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-  CppLab3.vcxproj -> C:\Users\raula\source\repos\CppLab3\x64\Debug\CppLab3.exe
+﻿  main.cpp
+C:\Users\raula\source\repos\CppLab3 — копия\CppLab3\main.cpp(169,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\raula\source\repos\CppLab3 — копия\CppLab3\main.cpp(186,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  CppLab3.vcxproj -> C:\Users\raula\source\repos\CppLab3 — копия\x64\Debug\CppLab3.exe

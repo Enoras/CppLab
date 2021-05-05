@@ -112,7 +112,7 @@
     <None Include="..\include\SDL_config_macosx.h.orig" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="03_event_driven_programming.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

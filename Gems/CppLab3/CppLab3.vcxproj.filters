@@ -286,7 +286,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="03_event_driven_programming.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
   </ItemGroup>
