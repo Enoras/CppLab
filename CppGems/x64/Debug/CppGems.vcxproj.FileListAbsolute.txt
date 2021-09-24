@@ -1,0 +1,4 @@
+C:\Users\raula\source\repos\CppGems\x64\Debug\CppGems.exe
+C:\Users\raula\source\repos\CppGems\x64\Debug\CppGems.pdb
+D:\Documents\CppLab\CppGems\x64\Debug\CppGems.exe
+D:\Documents\CppLab\CppGems\x64\Debug\CppGems.pdb
