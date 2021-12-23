@@ -80,25 +80,29 @@ public:
 	virtual Solution solve_task(const QuadEq& eq) const = 0;
 	void send_task(Teacher& teacher, const QuadEq& eq) const;
 	std::string get_name() const { return _name; };
+	virtual ~Student() {};
 };
 
 std::vector<Student*> init_simple_student_group();
 
-class GoodStudent :public Student {
+class good :public Student {
 public:
-	GoodStudent(const std::string& name) :Student(name) {};
+	good(const std::string& name) :Student(name) {};
 	Solution solve_task(const QuadEq& eq) const;
+	~good() {};
 };
 
-class AvgStudent :public Student {
+class aveng :public Student {
 public:
-	AvgStudent(const std::string& name) :Student(name) {};
+	aveng(const std::string& name) :Student(name) {};
 	Solution solve_task(const QuadEq& eq) const;
+	~aveng() {};
 };
 
 
-class BadStudent :public Student {
+class bad :public Student {
 public:
-	BadStudent(const std::string& name) :Student(name) {};
+	bad(const std::string& name) :Student(name) {};
 	Solution solve_task(const QuadEq& eq) const;
+	~bad() {};
 };

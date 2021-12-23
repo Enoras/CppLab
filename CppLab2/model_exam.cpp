@@ -22,22 +22,22 @@ vector<Student*> init_simple_student_group()
 	for (int i = 0; i < 5; i++) {
 		int type = rand() % 3;
 		if (type == 0)
-			group.push_back(new GoodStudent(names[i]));
+			group.push_back(new good(names[i]));
 		else if (type == 1)
-			group.push_back(new AvgStudent(names[i]));
+			group.push_back(new aveng(names[i]));
 		else
-			group.push_back(new BadStudent(names[i]));
+			group.push_back(new bad(names[i]));
 	}
 	return group;
 }
 
 
-Solution GoodStudent::solve_task(const QuadEq& eq) const
+Solution good::solve_task(const QuadEq& eq) const
 {
 	return { get_name(), eq.roots(),eq};
 }
 
-Solution AvgStudent::solve_task(const QuadEq& eq) const
+Solution aveng::solve_task(const QuadEq& eq) const
 {
 	vector<double> roots = eq.roots();
 	if (rand() % 2)
@@ -45,7 +45,7 @@ Solution AvgStudent::solve_task(const QuadEq& eq) const
 	return { get_name(), roots,eq };
 }
 
-Solution BadStudent::solve_task(const QuadEq& eq) const
+Solution bad::solve_task(const QuadEq& eq) const
 {
 	return { get_name(), {0}, eq };
 }

@@ -1,7 +1,2 @@
-﻿  Board.cpp
-  Bonus.cpp
-  Gem.cpp
-  main.cpp
-D:\Documents\CppLab\CppGems\main.cpp(8,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-  Создание кода...
+﻿  Bonus.cpp
   CppGems.vcxproj -> D:\Documents\CppLab\CppGems\x64\Debug\CppGems.exe

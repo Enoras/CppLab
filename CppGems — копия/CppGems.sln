@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppGems", "CppGems.vcxproj", "{B1437CAC-B678-43EC-A062-8620A881A6BF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1437CAC-B678-43EC-A062-8620A881A6BF}.Debug|x64.ActiveCfg = Debug|x64
+		{B1437CAC-B678-43EC-A062-8620A881A6BF}.Debug|x64.Build.0 = Debug|x64
+		{B1437CAC-B678-43EC-A062-8620A881A6BF}.Debug|x86.ActiveCfg = Debug|Win32
+		{B1437CAC-B678-43EC-A062-8620A881A6BF}.Debug|x86.Build.0 = Debug|Win32
+		{B1437CAC-B678-43EC-A062-8620A881A6BF}.Release|x64.ActiveCfg = Release|x64
+		{B1437CAC-B678-43EC-A062-8620A881A6BF}.Release|x64.Build.0 = Release|x64
+		{B1437CAC-B678-43EC-A062-8620A881A6BF}.Release|x86.ActiveCfg = Release|Win32
+		{B1437CAC-B678-43EC-A062-8620A881A6BF}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {393B2005-C9A3-4369-9E03-BE211C52D712}
+	EndGlobalSection
+EndGlobal

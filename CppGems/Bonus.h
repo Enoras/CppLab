@@ -25,6 +25,7 @@ public:
 
 	};
 	int GetNumTargets() const { return _num_affected_gems; };
+
 	virtual std::vector<sf::Vector2i> Activate(const sf::Vector2i& board_size,
 		const sf::Vector2i& coord) = 0;
 	virtual ~Bonus() {};
